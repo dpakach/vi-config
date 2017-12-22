@@ -23,6 +23,8 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/syntastic'
 Plugin 'valloric/youcompleteme'
+Plugin 'Yggdroot/indentLine'
+Plugin 'digitaltoad/vim-pug'
 
 
 " All of your Plugins must be added before the following line
@@ -42,6 +44,9 @@ filetype plugin indent on    " required
 
 
 colorscheme badwolf         " awesome colorscheme
+
+
+set noswapfile
 
 syntax enable           " enable syntax processing
 
@@ -93,6 +98,15 @@ inoremap jk <esc>
 " hybrid line numbers
 :set number relativenumber
 
+" move between split windows
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" auto complete html tags
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+
 
 
 
@@ -124,3 +138,29 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+let g:syntastic_python_python_exec = '/usr/bin/python'
+
+
+" Highlight all instances of word under cursor, when idle.
+" Useful when studying strange source code.
+" Type z/ to toggle highlighting on/off.
+nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
+function! AutoHighlightToggle()
+  let @/ = ''
+  if exists('#auto_highlight')
+    au! auto_highlight
+    augroup! auto_highlight
+    setl updatetime=4000
+    echo 'Highlight current word: off'
+    return 0
+  else
+    augroup auto_highlight
+      au!
+      au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+    augroup end
+    setl updatetime=500
+    echo 'Highlight current word: ON'
+    return 1
+  endif
+endfunction
