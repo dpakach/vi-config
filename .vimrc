@@ -21,7 +21,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-surround'
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
 Plugin 'valloric/youcompleteme'
 Plugin 'Yggdroot/indentLine'
 Plugin 'digitaltoad/vim-pug'
@@ -44,6 +44,7 @@ filetype plugin indent on    " required
 
 
 colorscheme badwolf         " awesome colorscheme
+set mouse=a
 
 
 set noswapfile
