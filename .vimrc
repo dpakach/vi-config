@@ -25,6 +25,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'valloric/youcompleteme'
 Plugin 'Yggdroot/indentLine'
 Plugin 'digitaltoad/vim-pug'
+Plugin 'alvan/vim-closetag'
 
 
 " All of your Plugins must be added before the following line
@@ -128,6 +129,8 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 map <leader>t :NERDTreeToggle<CR>
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let NERDTreeQuitOnOpen=1            " auto close nerdtree when new tab is opened
+
 
 
 " syntastic settings
