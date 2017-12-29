@@ -13,7 +13,6 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" add all the required plugins here after keyword 'Plugin' without quotes
 
 Plugin 'tpope/vim-fugitive'
 Plugin 'sjl/badwolf'
@@ -22,17 +21,29 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-surround'
+Plugin 'vim-syntastic/syntastic'
 " Plugin 'scrooloose/syntastic'
-Plugin 'valloric/youcompleteme'
+Bundle 'valloric/youcompleteme'
 Plugin 'Yggdroot/indentLine'
 Plugin 'digitaltoad/vim-pug'
 Plugin 'alvan/vim-closetag'
+Plugin 'vim-scripts/django.vim'
+Plugin 'tweekmonster/django-plus.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'sukima/xmledit'
+Plugin 'vim-scripts/pydoc.vim'
+Plugin 'vim-scripts/indentpython.vim'
+
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'kien/ctrlp.vim'
+
 
 
 " All of your Plugins must be added before the following line
-"
 call vundle#end()            " required
 filetype plugin indent on    " required
+filetype plugin on
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
@@ -46,67 +57,70 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 
-colorscheme badwolf                            " awesome colorscheme
-" set mouse=a
+colorscheme badwolf         " awesome colorscheme
+set mouse=a
 
 
-set autoread                                   " auto reload file"
 set noswapfile
 
-syntax enable                                  " enable syntax processing
+syntax enable           " enable syntax processing
 
-set tabstop=4                                  " number of visual spaces per TAB
+set tabstop=4       " number of visual spaces per TAB
 
-set softtabstop=4                              " number of spaces in tab when editing
+set softtabstop=4   " number of spaces in tab when editing
 
-set expandtab                                  " tabs are spaces
+set expandtab       " tabs are spaces
 
-set showcmd                                    " show command in bottom bar
+set showcmd             " show command in bottom bar
 
-set cursorline                                 " highlight current line
+set cursorline          " highlight current line
 
-set number                                     " show line numbers
+set number              " show line numbers
 
-filetype indent on                             " load filetype-specific indent files
+filetype indent on      " load filetype-specific indent files
 
-set wildmenu                                   " visual autocomplete for command menu
+set wildmenu            " visual autocomplete for command menu
 
-set showmatch                                  " highlight matching [{()}]
+set showmatch           " highlight matching [{()}]
 
-set incsearch                                  " search as characters are entered
-set hlsearch                                   " highlight matches
+set incsearch           " search as characters are entered
+set hlsearch            " highlight matches
 
-nnoremap <leader><space> :nohlsearch<CR>       " map for no highlight        
+nnoremap <leader><space> :nohlsearch<CR>
 
-set foldenable                                 " enable folding
+set foldenable          " enable folding
 
-set foldlevelstart=10                          " open most folds by default
+set foldlevelstart=10   " open most folds by default
 
-set foldnestmax=10                             " 10 nested fold max
+set foldnestmax=10      " 10 nested fold max
 
-nnoremap <space> za                            " space open/closes folds
+" space open/closes folds
+nnoremap <space> za
 
-set foldmethod=indent                          " fold based on indent level
+set foldmethod=indent   " fold based on indent level
 
 nnoremap j gj
 nnoremap k gk
 
+" highlight last inserted text
+nnoremap gV `[v`]
 
-nnoremap gV `[v`]                             " highlight last inserted text
+let mapleader=","       " leader is comma
 
-let mapleader=","                             " leader is comma
+" jk is escape
+inoremap jk <esc>
 
-inoremap jk <esc>                             " jk is escape
-
-                                              " hybrid line numbers
+" hybrid line numbers
 :set number relativenumber
 
-nnoremap <C-J> <C-W><C-J>                     " move between split windows
-nnoremap <C-K> <C-W><C-K>                     " with ctrl + movement-keys
-nnoremap <C-L> <C-W><C-L>                     " i.e. ctrl + h/j/k/l
-nnoremap <C-H> <C-W><C-H>                  
+" move between split windows
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags            " auto complete html tags
+" auto complete html tags
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 
 
 
@@ -117,26 +131,22 @@ autocmd FileType html set omnifunc=htmlcomplete#CompleteTags            " auto c
 
 
 
-" NERDTREE SETTINGS
+" nerdtree setting
 
-" open nerdtree automatically when vi is opened
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-" open nerdtree automatically when vi is opened in a directory
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 
-" map to open nerdtree  , t
 map <leader>t :NERDTreeToggle<CR>
 
-" auto close nerdtree when new tab is opened
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-let NERDTreeQuitOnOpen=1            
+let NERDTreeQuitOnOpen=1            " auto close nerdtree when new tab is opened
 
 
 
-" SYNTASTIC SETTINGS
+" syntastic settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -149,7 +159,13 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_python_python_exec = '/usr/bin/python'
 
 
-" ADDITIONAL SETTINGS
+
+" UlstiSnips
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
 
 " Highlight all instances of word under cursor, when idle.
 " Useful when studying strange source code.
@@ -173,3 +189,18 @@ function! AutoHighlightToggle()
     return 1
   endif
 endfunction
+
+
+
+"python with virtualenv support
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
+
+
+set clipboard=unnamed
