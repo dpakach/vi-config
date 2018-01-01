@@ -21,7 +21,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-surround'
-Plugin 'vim-syntastic/syntastic'
+" Plugin 'vim-syntastic/syntastic'
 " Plugin 'scrooloose/syntastic'
 Bundle 'valloric/youcompleteme'
 Plugin 'Yggdroot/indentLine'
@@ -29,7 +29,7 @@ Plugin 'digitaltoad/vim-pug'
 Plugin 'alvan/vim-closetag'
 Plugin 'vim-scripts/django.vim'
 Plugin 'tweekmonster/django-plus.vim'
-Plugin 'SirVer/ultisnips'
+" Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'sukima/xmledit'
 Plugin 'vim-scripts/pydoc.vim'
@@ -37,7 +37,9 @@ Plugin 'vim-scripts/indentpython.vim'
 
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/ctrlp.vim'
-
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
 
 
 " All of your Plugins must be added before the following line
@@ -63,27 +65,27 @@ set mouse=a
 
 set noswapfile
 
-syntax enable           " enable syntax processing
+        syntax enable                   " enable syntax processing
 
-set tabstop=4       " number of visual spaces per TAB
+set tabstop=4               " number of visual spaces per TAB
 
-set softtabstop=4   " number of spaces in tab when editing
+set softtabstop=4           " number of spaces in tab when editing
 
-set expandtab       " tabs are spaces
+set expandtab               " tabs are spaces
 
-set showcmd             " show command in bottom bar
+set showcmd                     " show command in bottom bar
 
-set cursorline          " highlight current line
+set cursorline                  " highlight current line
 
-set number              " show line numbers
+set number                      " show line numbers
 
-filetype indent on      " load filetype-specific indent files
+filetype indent on              " load filetype-specific indent files
 
-set wildmenu            " visual autocomplete for command menu
+set wildmenu                    " visual autocomplete for command menu
 
-set showmatch           " highlight matching [{()}]
+set showmatch                   " highlight matching [{()}]
 
-set incsearch           " search as characters are entered
+set incsearch                   " search as characters are entered
 set hlsearch            " highlight matches
 
 nnoremap <leader><space> :nohlsearch<CR>
@@ -167,6 +169,8 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 
+
+
 " Highlight all instances of word under cursor, when idle.
 " Useful when studying strange source code.
 " Type z/ to toggle highlighting on/off.
@@ -192,15 +196,17 @@ endfunction
 
 
 
-"python with virtualenv support
-py << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
-EOF
-
-
 set clipboard=unnamed
+
+"toggle for paste and nopaste mode
+
+set pastetoggle=<F2>
+
+" move current line or block of codes with alt+movement keys
+" ((super useful))
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
