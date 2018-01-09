@@ -31,4 +31,4 @@ vi configuration for python and javascript development
   
  
 now you are all set to code in vim
-#  :sparkles:APPY VIMMING :sparkles:  
+#  :sparkles:HAPPY VIMMING :sparkles:  
