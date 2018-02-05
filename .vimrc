@@ -15,7 +15,6 @@ Plugin 'VundleVim/Vundle.vim'
 
 
 Plugin 'tpope/vim-fugitive'
-Plugin 'sjl/badwolf'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -40,6 +39,10 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
+Plugin 'mattn/emmet-vim'
+Plugin 'junegunn/seoul256.vim'
+
+
 
 
 " All of your Plugins must be added before the following line
@@ -59,7 +62,14 @@ filetype plugin on
 " Put your non-Plugin stuff after this line
 
 
-colorscheme badwolf         " awesome colorscheme
+"   seoul256 (dark):
+"   Range:   233 (darkest) ~ 239 (lightest)
+"   Default: 237
+let g:seoul256_background = 234
+colo seoul256
+
+
+" general settings
 set mouse=a
 
 
@@ -111,6 +121,7 @@ let mapleader=","       " leader is comma
 
 " jk is escape
 inoremap jk <esc>
+inoremap JK <esc>
 
 " hybrid line numbers
 :set number relativenumber
@@ -174,6 +185,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " Highlight all instances of word under cursor, when idle.
 " Useful when studying strange source code.
 " Type z/ to toggle highlighting on/off.
+" found somewhere on stackoverflow ((super useful))
 nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
 function! AutoHighlightToggle()
   let @/ = ''
@@ -210,3 +222,10 @@ inoremap <A-j> <Esc>:m .+1<CR>==gi
 inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
+
+
+" emmet settings
+"
+"map for trigger
+"
+let g:user_emmet_leader_key = '<C-Z>'
