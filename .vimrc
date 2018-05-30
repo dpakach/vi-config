@@ -41,6 +41,10 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'mattn/emmet-vim'
 Plugin 'junegunn/seoul256.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'morhetz/gruvbox'
+Plugin 'prettier/vim-prettier'
 
 
 
@@ -65,21 +69,23 @@ filetype plugin on
 "   seoul256 (dark):
 "   Range:   233 (darkest) ~ 239 (lightest)
 "   Default: 237
-let g:seoul256_background = 233
-colo seoul256
+"   let g:seoul256_background = 233
+"   colo seoul256
 
 
 " general settings
 
 setlocal spell spelllang=en_us
-set mouse=a
+" set mouse=a
 
 
 set noswapfile
 
-        syntax enable                   " enable syntax processing
+syntax enable                   " enable syntax processing
 
 set tabstop=4               " number of visual spaces per TAB
+
+set shiftwidth=4            " indenting 2 spaces
 
 set softtabstop=4           " number of spaces in tab when editing
 
@@ -138,7 +144,11 @@ nnoremap <C-H> <C-W><C-H>
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 
 
-
+" gruvbox settings
+colo gruvbox
+set background=dark
+let g:gruvbox_invert_selection=0
+" let g:gruvbox_invert_selection=1
 
 
 " badwolf setting
@@ -213,7 +223,7 @@ endfunction
 set clipboard=unnamed
 
 "toggle for paste and nopaste mode
-
+"
 set pastetoggle=<F2>
 
 " move current line or block of codes with alt+movement keys
@@ -227,7 +237,13 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 
 
 " emmet settings
-"
-"map for trigger
-"
+"   map for trigger
 let g:user_emmet_leader_key = '<C-Z>'
+
+
+" ctrlp settings
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+
+" prettier settings
+let g:prettier#config#tab_width = 4
