@@ -22,8 +22,7 @@ vi configuration for python and javascript development
 - ## install all the plugins
   to install all the plugins used in this .vimrc file:
   - open your terminal
-  - open vim by typing typing `vi` or `vim`
-  
+  - open vim by typing typing `vim` and pressing enter
     you might get some errors at first, ignore them for now
   - run `:PluginInstall` in vim
   - to run form terminal type `vim +PluginInstall +qall`
